@@ -1,66 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Repository Laravel Mata Kuliah PBKK D (Pemrograman Berbasis Kerangka Kerja)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- Nama : Unedo Viery Kristenzky Tampubolon
+- NRP : 5025221116
 
-## About Laravel
+## Penjelasan UI
+### Components
+Beberapa component yang ada didalam repository ini
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**1. Header**
+```html
+<header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $slot }}</h1>
+    </div>
+</header>
+```
+> Header component ini digunakan untuk membuat dynamic header pada halaman web. Component ini menerima slot untuk menampilkan judul halaman.
+Digunakan dengan tag `<x-header>` pada file blade.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**2. NavLink**
+```html
+<a {{ $attributes }}
+    class="{{ $active
+        ? 'bg-gray-900 text-white'
+        : 'text-gray-300
+            hover:bg-gray-700 hover:text-white' }} block md:inline rounded-md px-3
+        py-2 text-base md:text-sm font-medium"
+    aria-current="{{ $active ? 'page' : false }}">{{ $slot }}</a>
+```
+> NavLink component ini digunakan untuk membuat dynamic link pada halaman web. Component ini menerima slot untuk menampilkan teks link dan menerima atribut untuk menentukan link aktif. Digunakan dengan tag `<x-nav-link>`pada file blade
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**3. NavBar**
+Component NavBar dapat dilihat pada file [resources/views/components/nav-bar.blade.php](resources/views/components/nav-bar.blade.php). Component ini digunakan untuk membuat navbar pada halaman web. Navbar menggunakan component `<x-nav-link>` yang sudah dibuat sebelumnya
 
-## Learning Laravel
+- Desktop View
+![Screenshot from 2024-09-11 07-00-50](https://github.com/user-attachments/assets/eda9e9db-544f-4a4a-9d5a-2dc8719ad956)
+- Mobile View
+![Screenshot from 2024-09-11 07-01-21](https://github.com/user-attachments/assets/97d16dde-1040-400b-ba58-abce8f1b4108)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**4. Layouts**
+Layouts yang digunakan pada repository ini adalah `layout.blade.php` yang terdapat pada folder [`resources/views/components`](resources/views/components). Layout ini digunakan untuk membuat layout dasar pada halaman web. Layout ini menggunakan component `<x-header>` dan `<x-nav-bar>` yang sudah dibuat sebelumnya. Sehingga untuk setiap page dapat menggunkan layout yang sama
+![image](https://github.com/user-attachments/assets/b2f6fa0b-2db7-4829-8965-8c4def69f0f7)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Pages
+Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `layout.blade.php` yang terdapat pada folder [`resources/views/components`](resources/views/components).Terdapat 5 page yang ada pada repository ini antara lain
+- [Home Page](resources/views/pages/home.blade.php)
+![image](https://github.com/user-attachments/assets/5f3fe5cf-66ea-4efb-b482-8453b794cb58)
+- [About Page](resources/views/pages/about.blade.php)
+![image](https://github.com/user-attachments/assets/959a94d6-e51e-42f7-ae0c-2aa9a8bbf025)
+- [Blog Page](resources/views/pages/blog.blade.php)
+![image](https://github.com/user-attachments/assets/1ea6de6e-8f6d-4ade-a4b0-dcaea6fdeb2f)
+- [Contact Page](resources/views/pages/contact.blade.php)
+![image](https://github.com/user-attachments/assets/f33e68f4-ff5a-44f1-b801-3f5cd35c6372)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
