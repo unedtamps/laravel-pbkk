@@ -8,6 +8,7 @@
 Beberapa component yang ada didalam repository ini
 
 **1. Header**
+
 ```html
 <header class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -19,6 +20,7 @@ Beberapa component yang ada didalam repository ini
 Digunakan dengan tag `<x-header>` pada file blade.
 
 **2. NavLink**
+
 ```html
 <a {{ $attributes }}
     class="{{ $active
@@ -31,14 +33,18 @@ Digunakan dengan tag `<x-header>` pada file blade.
 > NavLink component ini digunakan untuk membuat dynamic link pada halaman web. Component ini menerima slot untuk menampilkan teks link dan menerima atribut untuk menentukan link aktif. Digunakan dengan tag `<x-nav-link>`pada file blade
 
 **3. NavBar**
+
 Component NavBar dapat dilihat pada file [resources/views/components/nav-bar.blade.php](resources/views/components/nav-bar.blade.php). Component ini digunakan untuk membuat navbar pada halaman web. Navbar menggunakan component `<x-nav-link>` yang sudah dibuat sebelumnya
 
 - Desktop View
+
 ![Screenshot from 2024-09-11 07-00-50](https://github.com/user-attachments/assets/eda9e9db-544f-4a4a-9d5a-2dc8719ad956)
 - Mobile View
+
 ![Screenshot from 2024-09-11 07-01-21](https://github.com/user-attachments/assets/97d16dde-1040-400b-ba58-abce8f1b4108)
 
 **4. Layouts**
+
 Layouts yang digunakan pada repository ini adalah `layout.blade.php` yang terdapat pada folder [`resources/views/components`](resources/views/components). Layout ini digunakan untuk membuat layout dasar pada halaman web. Layout ini menggunakan component `<x-header>` dan `<x-nav-bar>` yang sudah dibuat sebelumnya. Sehingga untuk setiap page dapat menggunkan layout yang sama
 ![image](https://github.com/user-attachments/assets/b2f6fa0b-2db7-4829-8965-8c4def69f0f7)
 
