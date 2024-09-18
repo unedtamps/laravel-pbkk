@@ -34,7 +34,7 @@ Digunakan dengan tag `<x-header>` pada file blade.
 
 **3. NavBar**
 
-Component NavBar dapat dilihat pada file [resources/views/components/nav-bar.blade.php](resources/views/components/nav-bar.blade.php). Component ini digunakan untuk membuat navbar pada halaman web. Navbar menggunakan component `<x-nav-link>` yang sudah dibuat sebelumnya
+Component NavBar dapat dilihat pada file [resources/views/components/navbar.blade.php](resources/views/components/navbar.blade.php). Component ini digunakan untuk membuat navbar pada halaman web. Navbar menggunakan component `<x-nav-link>` yang sudah dibuat sebelumnya
 
 - Desktop View
 
