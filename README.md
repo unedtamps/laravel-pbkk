@@ -50,13 +50,26 @@ Layouts yang digunakan pada repository ini adalah `layout.blade.php` yang terdap
 
 ### Pages
 Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `layout.blade.php` yang terdapat pada folder [`resources/views/components`](resources/views/components).Terdapat 5 page yang ada pada repository ini antara lain
-- [Home Page](resources/views/pages/home.blade.php)
+- [**Home Page**](resources/views/pages/home.blade.php)
 ![image](https://github.com/user-attachments/assets/5f3fe5cf-66ea-4efb-b482-8453b794cb58)
-- [About Page](resources/views/pages/about.blade.php)
+- [**About Page**](resources/views/pages/about.blade.php)
 ![image](https://github.com/user-attachments/assets/959a94d6-e51e-42f7-ae0c-2aa9a8bbf025)
-- [Blog Page](resources/views/pages/blog.blade.php)
-![image](https://github.com/user-attachments/assets/1ea6de6e-8f6d-4ade-a4b0-dcaea6fdeb2f)
-- [Contact Page](resources/views/pages/contact.blade.php)
+- [**Blog**](resources/views/pages/blog.blade.php)
+  - Blog Page
+
+  Menampilkan semua blog yang ada. Data blog masih manual array yang ada di
+  model [post]('app/Models/Post.php'). Model masih dibuat manual yang memiliki 2
+  method saja Antara lain `show()` dan `get($slug)`. Untuk menampikkan semua blok
+  gunakan method `show()`
+  ![Screenshot from 2024-09-18 10-03-11](https://github.com/user-attachments/assets/664eafd4-7e0a-4948-a400-e1162b14f414)
+  - Single Blog
+
+  Menampilkan detail dari blog ketika user menekan tombol `Read More`. Untuk
+  menampikan single post gunakan method `get($slug)` dengan parameter nya adalah
+  slug dari artikel itu
+![Screenshot from 2024-09-18 10-05-41](https://github.com/user-attachments/assets/f694f659-f2bf-45d6-9441-4c8c678abcde)
+
+- [**Contact Page**](resources/views/pages/contact.blade.php)
 ![image](https://github.com/user-attachments/assets/f33e68f4-ff5a-44f1-b801-3f5cd35c6372)
 
 
