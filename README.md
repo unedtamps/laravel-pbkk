@@ -58,7 +58,7 @@ Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `la
   - Blog Page
 
   Menampilkan semua blog yang ada. Data blog masih manual array yang ada di
-  model [post]('app/Models/Post.php'). Model masih dibuat manual yang memiliki 2
+  model [post](app/Models/Post.php). Model masih dibuat manual yang memiliki 2
   method saja Antara lain `show()` dan `get($slug)`. Untuk menampikkan semua blok
   gunakan method `show()`
   ![Screenshot from 2024-09-18 10-03-11](https://github.com/user-attachments/assets/664eafd4-7e0a-4948-a400-e1162b14f414)
