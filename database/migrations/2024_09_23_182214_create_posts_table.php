@@ -15,11 +15,18 @@ return new class extends Migration
             'posts', function (Blueprint $table) {
                 $table->id();
                 $table->string("name");
-                $table->string("author");
+                $table->foreignId('author_id')->constrained(
+                    table: 'users',
+                    indexName: 'post_user_id',
+                );
                 $table->string("publisher");
                 $table->string("city");
                 $table->text("body");
                 $table->string("slug");
+                $table->foreignId('category_id')->constrained(
+                    table: 'categories',
+                    indexName: 'post_category_id',
+                );
 
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

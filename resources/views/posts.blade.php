@@ -7,7 +7,11 @@
             </a>
             <div class="text-base text-gray-500">
                 <p><a href="#">{{ $post['city'] }}</a>, {{ $post->created_at->diffForHumans() }}</p>
-                <p>{{ $post['author'] }} - {{ $post['publisher'] }}</p>
+                <p><a class="hover:underline" href="/authors/{{ $post->author->username }}"> {{ $post->author->name }} in
+                        <a class="hover:underline"
+                            href="/category/{{ $post->category->slug }}">{{ $post->category->name }} </a>
+                    </a>-
+                    {{ $post['publisher'] }}</p>
             </div>
             <p class="my-4 font-light">
                 {{ Str::limit($post['body'], 100) }}
