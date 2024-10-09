@@ -117,7 +117,93 @@ Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `la
         );
     }
   ```
+
+    Pada aplikasi kita masih terdapat N+1 problem. N+1 problem terjadi ketika kita melakukan query terhadap data yang memiliki relasi dengan data lain. Sebagai contoh pada aplikasi kita ketika kita menampilkan post kita juga menampilkan nama author dari post tersebut. Dengan cara ini kita melakukan query terhadap table user sebanyak jumlah post yang ada. Untuk mengatasi hal ini kita dapat menggunakan eager loading. Eager loading adalah cara untuk mengambil data yang memiliki relasi dengan data lain sekaligus. Dengan cara ini kita hanya melakukan query sebanyak 2 kali yaitu untuk mengambil data post dan data user. Berikut ini adalah contoh penggunaan eager loading pada aplikasi kita. Didalam laravel hal ini bisa diselaikan di dalam model kita dengan cara menambahkan kode ini kedalam model post
+  ```php 
+    protected $with = ['author' , 'category'];
+  ```
+
+  Kita juga dapat melidungi aplikasi laravel kita agar menggunakan eager loading
+  secara devalud dengan menambahkan kode ini di `AppServiceProviders.php`
+
+  ```php 
+    public function boot(): void
+    {
+        Model::preventLazyLoading();
+    }
+  ```
+  Kemudian kita refactor kode blade agar tampilan dari post blog lebih baik.
+  Untuk redesign, kita menggunakan platform flowbite yang menyediakan component
+  component yang dapat kita gunakan . Berikut ini adalah hasil akhirnya
+
+
+  ![image](https://github.com/user-attachments/assets/53886965-6467-4cd7-894c-0189c6489fa0)
+
+  Kemudian kita tambahkan juga fitur search pada blog yang akan mencari
+  berdasarkan judul blocknya. Untuk UI searchnya bisa didapatkan di flowbite
+  juga. Untuk mendapatkan judul yang igin di cari dari request kita bisa
+  melakukannya di level model dengan menggunakan  query scope. Berikut ini
+  adalah kodenya 
+  ```php 
+    public  function scopeFilter(Builder $query, array $filters) :void
+    {
+        $query->when(
+            $filters['search'] ?? false, fn ($query, $search) =>
+            $query->where('name', 'like', '%' .$search. '%')
+        );
+
+        $query->when(
+            $filters['category'] ?? false, fn ($query, $category) =>
+            $query->whereHas('category', fn ($query) => $query->where('slug', 'like', '%'. $category .'%'))
+        );
+
+        $query->when(
+            $filters['author'] ?? false, fn ($query, $author) =>
+            $query->whereHas('author', fn ($query) => $query->where('username', 'like', '%'. $author .'%'))
+        );
+    }
+  ```
+  ```php
+    Route::get(
+        "/posts", function () {
+            /* $posts = Post::with(['author', 'category'])->get(); */
+            return view(
+                "posts", [
+                "title" => "Blog Page",
+                "posts" => Post::filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString()
+                ]
+            );
+        }
+    );
+  ```
+  Kita hanya perlu melakukan passing request mana yang akan kita filter melalui
+  modelnya. Dengan begini kita dapat mencari judul dari blog ketika kita berada
+  di halaman post kategory tertentu atau laman post dengan user tertentu.
+  Sehingga hasilnya bukanlah kategory atau user lain
+
+  Setelah itu buat juga pagination untuk membagi bagi hasil query yang
+  dihasilkan oleh database jangan lupa tambahkan `withQueryString()` agar hasil
+  pagination pada kategory tertentu atau user tentu , query stringnya di append
+  ke URL sehingga hasilnya sesuai. Berikut ini tampilan dengan pagination
+
+  ![image](https://github.com/user-attachments/assets/bd88ef23-7c78-4d56-9f7c-8d2d8ea538fd)
+
+
+  ```php
+    @if (request('category'))
+    <input type="hidden" name="category" value="{{ request('category') }}">
+    @endif
+
+    @if (request('author'))
+    <input type="hidden" name="author" value="{{ request('author') }}">
+    @endif
+   ```
+
+   Jangan lupa tambahkan hidden input agar saat berada di post berdasarkan
+   author atau category , nilai parameter ikut difilter
+
   - User Blog
+
   Sebelum menampilkan Single blog ada baiknya membuat model, factory dan
   migration
   user. berikut ini adalah spesifikasi dari migration user
@@ -172,13 +258,19 @@ Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `la
   ![image](https://github.com/user-attachments/assets/c8982ce2-0604-4a35-b1ce-46c4ef9141fd)
 
   - Single Blog
+
   Menampilkan detail dari blog ketika user menekan tombol `Read More`. Untuk
   menampikan single post gunakan method `get($slug)` dengan parameter nya adalah
   slug dari artikel itu
 
-![Screenshot from 2024-09-18 10-05-41](https://github.com/user-attachments/assets/f694f659-f2bf-45d6-9441-4c8c678abcde)
+  ![Screenshot from 2024-09-18 10-05-41](https://github.com/user-attachments/assets/f694f659-f2bf-45d6-9441-4c8c678abcde)
+
+  Terdapat redesign UI pada single blog agar terlihat lebih menarik
+  
+  ![image](https://github.com/user-attachments/assets/c3ae4622-a7ed-45d4-af8a-a8433900c3aa)
 
   - Category Blog
+
   Masing masing post akan memiliki kategory nya tersendiri maka dari itu pada
   table post ditambahkan foregin key one to many . Satu post memiliki satu
   category dan satu kategori banyak post. Dengan comamand yang sama di buat
@@ -233,11 +325,5 @@ Setiap Pages yang ada pada repository ini menggunakan layout yang sama yaitu `la
   ![image](https://github.com/user-attachments/assets/1cb57507-d7ec-4572-8f8d-d096e9999813)
 
 - [**Contact Page**](resources/views/pages/contact.blade.php)
-![image](https://github.com/user-attachments/assets/f33e68f4-ff5a-44f1-b801-3f5cd35c6372)
-
-
-
-
-
-
+  ![image](https://github.com/user-attachments/assets/f33e68f4-ff5a-44f1-b801-3f5cd35c6372)
 

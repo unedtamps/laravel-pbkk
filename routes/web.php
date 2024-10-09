@@ -40,10 +40,11 @@ Route::get(
 
 Route::get(
     "/posts", function () {
+        /* $posts = Post::with(['author', 'category'])->get(); */
         return view(
             "posts", [
             "title" => "Blog Page",
-            "posts" => Post::all()
+            "posts" => Post::filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString()
             ]
         );
     }
@@ -57,13 +58,14 @@ Route::get(
 
 Route::get(
     "/authors/{user:username}", function (User $user) {
+        /* $post = $user->posts->load('author', 'category'); */
         return view('posts', ['title' => 'Article by  '. $user->name, 'posts' => $user->posts]);
     }
 );
 Route::get(
     "/category/{category:slug}", function (Category $category) {
+        /* $post = $category->posts->load('category', 'author'); */
         return view('posts', ['title'=> $category->name .  ' Article', 'posts'=> $category->posts]);
-
     }
 );
 

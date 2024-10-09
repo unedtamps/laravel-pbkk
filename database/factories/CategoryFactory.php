@@ -17,10 +17,17 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $tailwindColors = collect(
+            [
+            'red-100', 'green-100', 'blue-100', 'yellow-100', 'purple-100', 'orange-100',
+            'pink-100', 'gray-100', 'indigo-100', 'teal-100', 'cyan-100', 'emerald-100',
+            'amber-100', 'lime-100', 'rose-100'
+            ]
+        );
         return [
           'name' => fake()->sentence(rand(1, 2), false),
-            'slug' => Str::slug(fake()->sentence(rand(1, 2), false))
-
+            'slug' => Str::slug(fake()->sentence(rand(1, 2), false)),
+            'color' => $tailwindColors->random()
         ];
     }
 }
